@@ -310,143 +310,157 @@ This design keeps the backend core focused on ingestion, persistence, and messag
 
 ## Repository Structure
 
-At the GitHub repository root you will typically have:
+At the GitHub repository root you currently have:
 
-- README.md (this file)  
-- catvsdoglive_backend.zip  
-- catvsdoglive_frontend.zip  
-- catvsdoglive_modeltraining.zip (training-related files)  
+- `README.md` – full documentation and architecture overview  
+- `LICENSE` – MIT license  
+- `catvsdoglive_frontend.zip` – frontend snapshot (Node.js frontend + static assets)  
+- `catvsdoglive_modeltraining.zip` – model training script and class weights  
 
-The zips contain the full source code and artifacts.
+The **backend** snapshot is stored as a **GitHub Release asset**, not as a tracked file in the repository root:
 
-### Backend archive (catvsdoglive_backend.zip)
+- `catvsdoglive_backend.zip` – attached to the latest Release under the **Releases** tab on GitHub.
 
-Contents (top-level directory inside the archive):
+All three archives together contain the full source code and artifacts.
 
-- backend/
-  - index.js
-  - api.js
-  - websocket.js
-  - database.js
-  - aggregator.js
-  - retryFailedTokens.js
-  - maintenance.js
-  - maintenance-worker.js
-  - operationsTracker.js
-  - queueManager.js
-  - fileDurability.js
-  - workers.js
-  - dbHandler.js
-  - fileHandler.js
-  - tokenProcessingService.js
-  - tokenProcessor.js
-  - ipfsDownloader.js
-  - urlUtils.js
-  - browserHeaders.js
-  - tokenRegistry.js
-  - testmodel.py
-  - sentimentmodel.py
-  - custom_lexicon.json
-  - .env.example_backend
-  - package.json
-  - package-lock.json
-  - database/
-    - tokens.db
-    - sentiment.db
-    - texts.db
-    - queue/
+### Backend archive (`catvsdoglive_backend.zip`)
+
+Location:
+
+- Available as an asset in the latest GitHub **Release**.
+
+Contents (inside the archive):
+
+- `backend/`
+  - `index.js`
+  - `api.js`
+  - `websocket.js`
+  - `database.js`
+  - `aggregator.js`
+  - `retryFailedTokens.js`
+  - `maintenance.js`
+  - `maintenance-worker.js`
+  - `operationsTracker.js`
+  - `queueManager.js`
+  - `fileDurability.js`
+  - `workers.js`
+  - `dbHandler.js`
+  - `fileHandler.js`
+  - `tokenProcessingService.js`
+  - `tokenProcessor.js`
+  - `ipfsDownloader.js`
+  - `urlUtils.js`
+  - `browserHeaders.js`
+  - `tokenRegistry.js`
+  - `testmodel.py`
+  - `sentimentmodel.py`
+  - `custom_lexicon.json`
+  - `.env.example_backend`
+  - `package.json`
+  - `package-lock.json`
+  - `database/`
+    - `tokens.db`
+    - `sentiment.db`
+    - `texts.db`
+    - `queue/`
       - backup and emergency queue files (if present)
-  - models/
-    - resnet50_model.pkl
-    - resnet101_model.pkl
-    - resnet152_model.pkl
-  - token_images/ (not included in the zip; created at runtime as IMAGE_DIR)
+  - `models/`
+    - `resnet50_model.pkl`
+    - `resnet101_model.pkl`
+    - `resnet152_model.pkl`
+  - `token_images/` (directory expected at runtime as `IMAGE_DIR`; image files themselves are not included to keep the archive size reasonable)
 
 Notes:
 
-- The token_images directory is not stored in the archive due to size; it will be created on startup if IMAGE_DIR points to it.
-- WAL/SHM files for the databases are intentionally not included; SQLite recreates them when needed.
+- The `token_images` directory is created and filled at runtime; it is included as a directory but not populated with image files.
+- SQLite WAL/SHM files are intentionally not included; SQLite recreates them as needed.
 
-### Frontend archive (catvsdoglive_frontend.zip)
+### Frontend archive (`catvsdoglive_frontend.zip`)
 
-Contents (top-level directory inside the archive):
+Location:
 
-- frontend/
-  - frontend.js
-  - word_counter.py
-  - word_generator.py
-  - generate_tts.py
-  - .env.example_frontend
-  - package.json
-  - package-lock.json
-  - public/
-    - index.html
-    - stream.html
-    - sentiment.html
-    - generator.html
-    - disclaimer.html
-    - 404.html
-    - 503.html
-    - 503_backup.html
-    - comingsoon.html
-    - robots/robots.txt
-    - css/
-      - styles.css
-      - windicss.css
-      - generator-enhancements.css
-      - sentiment-enhancements.css
-    - js/
-      - script.js
-      - counter.js
-      - stream.js
-      - sentiment.js
-      - sentiment-enhancements.js
-      - generator-logic.js
-      - generator-ui.js
-      - generator-enhancements.js
-      - globalAudio.js
-      - toggleOnOff.js
-      - popup.js
-      - button.js
-    - libs/
-      - pixi.mjs
-    - images/
-      - logo.png
-      - catvsdog.png
-      - catvsdog-ai.png
-      - catvsdogai.png
-      - 404.png
-      - 503.png
-      - default-placeholder.png
-      - hero and meme images (eloncatdog.png, elonmeme1.png, elonmeme2.png, elonmeme3.png, elonpump.png, etc.)
-    - content/
-      - about.txt
-      - section1.txt
-      - section2.txt
-      - rectangle.txt
-      - marquee.txt
-    - data.json
-    - game.json
-    - game-window.html
-    - audio/
-      - directory for generated audio files; trending-words-latest.wav and debug logs are not included and will be generated at runtime.
+- Stored in the repository root.
 
-### Model training archive (catvsdoglive_modeltraining.zip)
+Contents (inside the archive):
+
+- `frontend/`
+  - `frontend.js`
+  - `word_counter.py`
+  - `word_generator.py`
+  - `generate_tts.py`
+  - `.env.example_frontend`
+  - `package.json`
+  - `package-lock.json`
+  - `public/`
+    - `index.html`
+    - `stream.html`
+    - `sentiment.html`
+    - `generator.html`
+    - `disclaimer.html`
+    - `404.html`
+    - `503.html`
+    - `503_backup.html`
+    - `comingsoon.html`
+    - `robots/robots.txt`
+    - `css/`
+      - `styles.css`
+      - `windicss.css`
+      - `generator-enhancements.css`
+      - `sentiment-enhancements.css`
+    - `js/`
+      - `script.js`
+      - `counter.js`
+      - `stream.js`
+      - `sentiment.js`
+      - `sentiment-enhancements.js`
+      - `generator-logic.js`
+      - `generator-ui.js`
+      - `generator-enhancements.js`
+      - `globalAudio.js`
+      - `toggleOnOff.js`
+      - `popup.js`
+      - `button.js`
+    - `libs/`
+      - `pixi.mjs`
+    - `images/`
+      - `logo.png`
+      - `catvsdog.png`
+      - `catvsdog-ai.png`
+      - `catvsdogai.png`
+      - `404.png`
+      - `503.png`
+      - `default-placeholder.png`
+      - hero and meme images (`eloncatdog.png`, `elonmeme1.png`, `elonmeme2.png`, `elonmeme3.png`, `elonpump.png`, etc.)
+    - `content/`
+      - `about.txt`
+      - `section1.txt`
+      - `section2.txt`
+      - `rectangle.txt`
+      - `marquee.txt`
+    - `data.json`
+    - `game.json`
+    - `game-window.html`
+    - `audio/`
+      - directory used for generated audio files; `trending-words-latest.wav`, `tts_debug.log`, and test files are generated at runtime and are not included in the archive.
+
+### Model training archive (`catvsdoglive_modeltraining.zip`)
+
+Location:
+
+- Stored in the repository root.
 
 Contents:
 
-- train_all.py  
-- classweights.txt  
+- `train_all.py`  
+- `classweights.txt`  
 
-train_all.py:
+`train_all.py`:
 
-- sets up a FastAI training loop for the cat/dog/other classifier
-- expects classweights.txt to provide per-class weights (for example based on dataset class frequencies)
-- is intended for offline use with your own dataset mounted in the paths referenced in the script
+- Sets up a FastAI training loop for the Cat / Dog / Other classifier.
+- Expects `classweights.txt` to provide per-class weights (for example, based on dataset class frequencies).
+- Is intended for offline use with your own dataset mounted in the paths referenced in the script.
 
-This training archive is not required for running the live system but allows you to retrain or fine-tune models following the same pipeline.
-
----
+This training archive is not required to run the live system but allows you to retrain or fine-tune models using the same pipeline.
 
 ## Getting Started
 
