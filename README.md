@@ -380,6 +380,15 @@ Notes:
 
 - The `token_images` directory is created and filled at runtime; it is included as a directory but not populated with image files.
 - SQLite WAL/SHM files are intentionally not included; SQLite recreates them as needed.
+  
+## Related project – GENESIS_MACHINE
+
+[GENESIS_MACHINE](https://github.com/catvsdoglive/genesis-machine) is an autonomous meme token
+generator (Mistral + Stable Diffusion) that uses live trending words from this project via the
+`/get-trending-words` endpoint.
+
+It can run standalone or alongside catvsdog-live to generate synthetic tokens and images based on
+the classifier’s live trending data.
 
 ### Frontend archive (`catvsdoglive_frontend.zip`)
 
