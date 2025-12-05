@@ -1,3 +1,9 @@
+## Downloads
+
+- Backend archive: see the latest **Release** (catvsdoglive_backend.zip)
+- Frontend archive: catvsdoglive_frontend.zip (in repo root)
+- Model training archive: catvsdoglive_modeltraining.zip (in repo root)
+
 # catvsdog.live – Full Open-Source Archive
 
 catvsdog.live is a real-time crypto token classifier and sentiment tracker that was live from **July 2025 – December 2025**.  
