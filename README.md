@@ -1,6 +1,7 @@
 ## Downloads
 
-- Backend archive: see the latest **Release** (catvsdoglive_backend.zip)
+- Backend archive: see the **Release** (catvsdoglive_backend.zip)
+- All ops files: see the **Release** (catvsdog_live_ops.zip)
 - Frontend archive: catvsdoglive_frontend.zip (in repo root)
 - Model training archive: catvsdoglive_modeltraining.zip (in repo root)
 
